@@ -30,8 +30,6 @@ app.use('/shipments',shipments)
 const files = require('./routers/files.router')
 app.use('/files',files)
 
-const emails = require('./routers/emails.router')
-app.use('/emails',emails)
 
 const groups = require('./routers/groups.router')
 app.use('/groups',groups)
@@ -39,24 +37,7 @@ app.use('/groups',groups)
 
 
 console.log('environment=',process.env.NODE_ENV)
-// const authRouter = require('./routes/auth.route')
-// app.use('/auth',authRouter)
 
-// const usersRouter = require('./routes/users.route')
-// app.use('/users',usersRouter)
-
-// const manifestsRouter = require('./routes/manifests.route')
-// app.use('/manifests',manifestsRouter)
-
-
-// const shipmentsRouter = require('./routes/shipments.route')
-// app.use('/shipments',shipmentsRouter)
-
-// const userGroupsRouter = require('./routes/userGroups.route')
-// app.use('/groups',userGroupsRouter)
-
-// const fileRouter = require('./routes/file.route')
-// app.use('/file',fileRouter)
 
 app.get('/',(req,res) =>{
    console.log(req.query)
