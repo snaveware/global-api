@@ -9,7 +9,7 @@ module.exports = class User {
     },
     lastName: {
       type: String,
-      default: true,
+      required: true,
     },
     email: {
       type: String,

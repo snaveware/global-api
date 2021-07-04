@@ -36,8 +36,6 @@ app.use('/groups',groups)
 
 
 
-console.log('environment=',process.env.NODE_ENV)
-
 
 app.get('/',(req,res) =>{
    console.log(req.query)
