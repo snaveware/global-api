@@ -5,9 +5,12 @@ require('dotenv').config()
 const RequestHandler = require('../utils/RequestHandler')
 
 module.exports = class Email{
-   from = Config.FROM
-   api_key = process.env.SENDGRID_API_KEY
-   logo = fs.readFileSync(`${appRoot}/images/logo.jpg`).toString('base64')
+   constructor(){
+      this.from = Config.FROM
+      this.api_key = process.env.SENDGRID_API_KEY
+      this.logo = fs.readFileSync(`${appRoot}/images/logo.jpg`).toString('base64')
+   }
+ 
    
    prepare(to,subject,message,filePath){
       sgMail.setApiKey(this.api_key)

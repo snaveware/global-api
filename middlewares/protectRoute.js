@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
 
   try {
     //get token from req header
-    let token = req.header("token");
+    let token = req.header("authorization");
     const url = req.originalUrl.toLowerCase()
     let isFile = false
     if(url.indexOf('file') != -1){
@@ -25,6 +25,17 @@ module.exports = async (req, res, next) => {
       }
       RequestHandler.throwError(403,'Access denied. please provide a token')();
     }
+
+
+    if(!isFile){
+      
+      if(!token.startsWith('Bearer ')){
+        RequestHandler.throwError(403,'Access denied. token should be formatted as bearer token')();
+      }
+
+      token = token.trim().split(' ').pop()
+    }
+  
     const verified = jwt.verify(token, process.env.SECRET);
     req.body.verified = true;
     req.body.userId = verified.id;

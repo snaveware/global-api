@@ -200,7 +200,7 @@ module.exports = class Manifests{
             return RequestHandler.sendSuccess(res,'Email sent successfully')
          })
          .catch( error =>{
-            return RequestHandler.sendError(res,new Error('Failed'))
+            return RequestHandler.sendError(res,new Error('Failed to send the manifest'))
          })
          
       } catch (error) {

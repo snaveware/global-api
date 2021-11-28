@@ -4,7 +4,7 @@ module.exports = class Config{
    static EMAIL = 'work.evans020@gmail.com'
    static COMPANY_NAME = 'Global Inc'
    //email
-   static FROM = 'work.evans020@gmail.com' //email used to send other emails
+   static FROM = 'metametaross@gmail.com' //email used to send other emails
    //database
    static DEFAULT_LIMIT = 0
    static DEFAULT_PAGE = 1
