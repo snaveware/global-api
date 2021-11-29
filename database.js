@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const Group = require("./models/group.model");
 require("dotenv").config();
 mongoose = require("mongoose");
-const Config = require('./Config')
+const Config = require('./Config');
 
 function db() {
   const options = {

@@ -1,17 +1,17 @@
-const express = require('express')
-const app = express()
-const fs = require('fs')
-require('dotenv').config()
-require('./database')()
-const cors = require('cors')
+const express = require('express');
+const app = express();
+const fs = require('fs');
+require('dotenv').config();
+require('./database')();
+const cors = require('cors');
 
-app.use(cors())
+app.use(cors());
 var path = require('path');
 global.appRoot = path.resolve(__dirname);
 
 
 
-app.use(express.json())
+app.use(express.json());
 
 
 //routers middlewares
