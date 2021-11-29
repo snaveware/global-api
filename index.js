@@ -43,8 +43,8 @@ app.get('/',(req,res) =>{
 })
 
 
-app.listen(process.env.PORT|5000,()=>{
-   console.log(`server running on port ${process.env.PORT|5000}`)
+app.listen(process.env.PORT || 5000,()=>{
+   console.log(`server running on port ${process.env.PORT || 5000}`)
 })
 
 
