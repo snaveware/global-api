@@ -194,7 +194,7 @@ module.exports = class Manifests{
          }
          
          const emailSender = new Email()
-         const email = emailSender.prepare(to,subject,message,filePath)
+         const email = emailSender.prepareManifestEmail(to,subject,message,filePath)
          sgMail.send(email)
          .then( success =>{
             return RequestHandler.sendSuccess(res,'Email sent successfully')

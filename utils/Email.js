@@ -12,7 +12,7 @@ module.exports = class Email{
    }
  
    
-   prepare(to,subject,message,filePath){
+   prepareManifestEmail(to,subject,message,filePath){
       sgMail.setApiKey(this.api_key)
       const file = fs.readFileSync(filePath).toString('base64')
       const email = {
@@ -45,6 +45,32 @@ module.exports = class Email{
          //    }
          // ]
       }
+      return email
+   }
+
+   preparePasswordRecoveryEmail(to,subject,url){
+      sgMail.setApiKey(this.api_key)
+      const email = {
+         to:to,
+         from:{
+            email:this.from,
+            name:Config.COMPANY_NAME
+         },
+         subject:subject,
+         text:`
+         Click the url below to recover your password
+         ${url}
+         `,
+         html:`
+         <p> click the link below to recover your password.</p>
+         <a href="${url}" style="background-color: rgb(100,100,250); text-decoration: none; color: white; padding: 8px 15px; border-radius: 5px;">Recover Your Password </a>
+
+         <p>Or visit the following url</p>
+         <p style="padding: 5px; text-align: center">${url}</p>
+         
+         `,
+      }
+
       return email
    }
 

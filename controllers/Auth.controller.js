@@ -1,5 +1,13 @@
 const Login = require('../utils/Login')
 const RequestHandler = require('../utils/RequestHandler')
+const Joi = require('joi')
+const User = require('../models/user.model')
+const {sign,verify} = require('jsonwebtoken')
+const {hash} = require('bcryptjs')
+const Email = require('../utils/Email')
+const sgMail = require('@sendgrid/mail')
+
+const emailSender = new Email()
 
 module.exports = class Auth{
    static async login(req,res) {  
@@ -65,6 +73,90 @@ module.exports = class Auth{
          RequestHandler.sendError(res,error)
       }
      
+   }
+
+   static async sendRecoveryEmail(req,res){
+
+      try {
+           //make sure email is passed
+         const validationSchema = Joi.object({
+            email: Joi.string().email({minDomainSegments: 2}).required(),
+            setNewPasswordUrl: Joi.string().uri().required()
+         })
+
+
+         const {value:validated, error} = await validationSchema.validate(req.body)
+         if(error){
+            RequestHandler.throwError(400,error)()
+         }
+
+         const {user} = await  User.findByEmail(validated.email)
+         if(!user){
+            return RequestHandler.sendSuccess(res,'Sent a recovery url to the email if it is registered to a user')
+         }
+         const token = sign({
+            _id: user._id,
+         },process.env.PASSWORDSECRET,{expiresIn:600})
+
+         const url =  `${validated.setNewPasswordUrl}?t=${token}`
+
+         //sendEmail
+         const email = emailSender.preparePasswordRecoveryEmail(user.email,'Password Recovery',url)
+         
+         await sgMail.send(email)
+
+
+         RequestHandler.sendSuccess(res,'Sent a recovery url to the email if it is registered to a user')
+
+      } catch (error) {
+         
+         RequestHandler.sendError(res,error)
+      }
+    
+   }
+
+   static async recoverPassword(req,res){
+
+      try {
+           //make sure passwords are passed
+         const validationSchema = Joi.object({
+            password: Joi.string().min(8).required(),
+            confirmPassword: Joi.ref("password"),
+            token: Joi.string().required()
+         })
+
+         const {value: validated, error} = await validationSchema.validate(req.body)
+         
+         if(error){
+            RequestHandler.throwError(400,error)()
+         }
+
+         //verifytoken
+         let extracted;
+         try {
+             extracted = await verify(validated.token,process.env.PASSWORDSECRET);
+         } catch (error) {
+            RequestHandler.throwError(400,'Link expired')();
+         }
+         
+
+         const hashedPassword = await hash(validated.password,10)
+
+         const {updation, error: updationError} = User.updateOne(extracted._id,{password: hashedPassword});
+
+         
+         if(updationError){
+            RequestHandler.throwError(500,'Error changing your password')()
+         }
+
+         
+         RequestHandler.sendSuccess(res,'Password changed successfully')
+
+      } catch (error) {
+
+         RequestHandler.sendError(res,error)
+      }
+    
    }
 }
 
