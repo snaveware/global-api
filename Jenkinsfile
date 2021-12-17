@@ -5,7 +5,10 @@ pipeline {
         stage('build') {
             steps {
                 echo 'building global-api'
+                sh 'node --version'
+                sh 'npm --version'
                 sh 'npm install'
+                
                 
             }
         }
