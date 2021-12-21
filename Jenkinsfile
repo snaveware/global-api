@@ -1,7 +1,9 @@
 pipeline {
-    docker {
-      image 'node:latest'
-      args '-u root:root'
+    agent {
+        docker {
+            image 'node:latest'
+            args '-u root:root'
+        }
     }
     stages {
         stage('build') {
