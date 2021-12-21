@@ -5,7 +5,7 @@ require("dotenv").config();
 mongoose = require("mongoose");
 const Config = require('./Config');
 
-function db() {
+function db(callback) {
   const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -23,6 +23,8 @@ function db() {
         init()
       }
     }
+
+    callback()
 
   });
 }
