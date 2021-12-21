@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 
 
 describe(' check login endpoint /auth/login ', ()=>{
-    it('check if the results have a token',  (done)=>{
+    it('Check if login is functional',  (done)=>{
         credentials = {
             email: 'work.evans020@gmail.com',
             password: "password"
