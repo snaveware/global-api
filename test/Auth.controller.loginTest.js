@@ -14,14 +14,20 @@ describe(' check login endpoint /auth/login ', ()=>{
             email: 'work.evans020@gmail.com',
             password: "password"
         }
-        chai.request(server)
-        .post('/auth/login')
-        .send(credentials)
-        .end((err,response)=>{
-            //console.log(response)
-            chai.expect(response).to.have.status(200)
-        })
+
+        setTimeout(() => {
+            chai.request(server)
+            .post('/auth/login')
+            .send(credentials)
+            .end((err,response)=>{
+                //console.log(response)
+                chai.expect(response).to.have.status(200)
+            })
+            done()
+            
+        }, 5000);
         
-        done()
+        
+        
     })
 })
