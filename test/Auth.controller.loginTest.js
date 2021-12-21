@@ -15,17 +15,17 @@ describe(' check login endpoint /auth/login ', ()=>{
             password: "password"
         }
 
-        setTimeout(() => {
-            chai.request(server)
-            .post('/auth/login')
-            .send(credentials)
-            .end((err,response)=>{
-                //console.log(response)
-                chai.expect(response).to.have.status(200)
-            })
-            done()
+        
+        chai.request(server)
+        .post('/auth/login')
+        .send(credentials)
+        .end((err,response)=>{
+            //console.log(response)
+            //chai.expect(response).to.have.status(200)
+        })
+        done()
 
-        }, 1000);
+      
         
         
         
