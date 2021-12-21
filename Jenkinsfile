@@ -1,11 +1,12 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:17-alpine3.14' }
+    }
 
     stages {
         stage('build') {
             steps {
                 echo 'building global-api'
-                
                 sh 'node --version'
                 sh 'npm --version'
                 sh 'npm install'
