@@ -1,8 +1,8 @@
 pipeline {
-    agent {
-        docker { image 'node:17-alpine3.14' }
+    docker {
+      image 'node:latest'
+      args '-u root:root'
     }
-
     stages {
         stage('build') {
             steps {
