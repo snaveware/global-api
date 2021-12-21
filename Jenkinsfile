@@ -8,6 +8,7 @@ pipeline {
             steps {
                 echo 'building global-api'
                 sh 'npm cache clean --force'
+                sh 'sudo chown -R 113:120 "/.npm"'
                 sh 'node --version'
                 sh 'npm --version'
                 sh 'npm install'
