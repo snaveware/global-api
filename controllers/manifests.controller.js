@@ -150,6 +150,12 @@ module.exports = class Manifests{
           
             RequestHandler.throwError(400,"could not retrieve either the manifest or the  shipments in that manifest ")()
          }
+
+         var dir = `${appRoot}/pdfs`;
+         if (!path.existsSync(dir)) {
+            fs.mkdirSync(dir);
+         }
+         
          const doc = new ManifestPdf(manifest.manifest,shipments.shipments,{margin:50,size:'letter',layout:'landscape'})
          doc.manifest()
          doc.pipe(fs.createWriteStream(`${appRoot}/pdfs/manifest_${req.params.manifestId}.pdf`));
