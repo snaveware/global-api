@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 require('dotenv').config();
-const connectDb = require('./database');
+require('./database')();
 const cors = require('cors');
 
 app.use(cors());
@@ -43,11 +43,11 @@ app.get('/',(req,res) =>{
 })
 
 
-connectDb(()=>{
-   module.exports =  app.listen(process.env.PORT || 5000,()=>{
-      console.log(`server running on port ${process.env.PORT || 5000}`)
-   })
+
+module.exports =  app.listen(process.env.PORT || 5000,()=>{
+   console.log(`server running on port ${process.env.PORT || 5000}`)
 })
+
 
 
 

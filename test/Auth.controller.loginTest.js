@@ -24,8 +24,8 @@ describe(' check login endpoint /auth/login ', ()=>{
                 chai.expect(response).to.have.status(200)
             })
             done()
-            
-        }, 5000);
+
+        }, 1000);
         
         
         
