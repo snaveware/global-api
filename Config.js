@@ -1,6 +1,6 @@
 module.exports = class Config{
    //site
-   static BASE_URL = 'http://localhost:5000'
+   static BASE_URL = process.env.BASE_URL || 'http://localhost:5000'
    static EMAIL = 'work.evans020@gmail.com'
    static COMPANY_NAME = 'Global Inc'
    //email
