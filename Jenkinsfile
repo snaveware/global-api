@@ -7,6 +7,7 @@ pipeline {
         stage('build') {
             steps {
                 echo 'building global-api'
+                sh 'npm cache clean --force'
                 sh 'node --version'
                 sh 'npm --version'
                 sh 'npm install'
