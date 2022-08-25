@@ -15,6 +15,7 @@ module.exports = class Manifests{
    static async getManifests(req,res){
 
       try {
+         
          const category = req.query.c
          const search = req.query.s
          const options = determineOptions(category,search,req.body)
@@ -152,7 +153,7 @@ module.exports = class Manifests{
          }
 
          var dir = `${appRoot}/pdfs`;
-         if (!path.existsSync(dir)) {
+         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir);
          }
          

@@ -1,7 +1,7 @@
 module.exports = class Config{
    //site
    static BASE_URL = process.env.BASE_URL || 'http://localhost:5000'
-   static EMAIL = 'work.evans020@gmail.com'
+   static EMAIL = 'info@snaveware.com'
    static COMPANY_NAME = 'Global Inc'
    //email
    static FROM = 'metametaross@gmail.com' //email used to send other emails
