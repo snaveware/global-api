@@ -7,8 +7,8 @@ const transporter = nodemailer.createTransport({
 
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-    user: "info@snaveware.com",
-    pass: "3EDD36B0F71552E969A695AB46E9A7823850",
+    user: "mail@snaveware.com",
+    pass: "A396E2D087546B0D058553612F50A275EF25",
   },
 });
 
@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 async function sendMail(to, subject, message, filePath, fileName) {
   // send mail with defined transport object
   const info = await transporter.sendMail({
-    from: "info@snaveware.com", // sender address
+    from: "Global<mail@snaveware.com>", // sender address
     to: to, // list of receivers
     subject: subject, // Subject line
     text: message, // plain text body
@@ -41,7 +41,7 @@ async function sendMail(to, subject, message, filePath, fileName) {
 
 async function sendRecoveryEmail(to, subject, url) {
   const info = await transporter.sendMail({
-    from: "info@snaveware.com", // sender address
+    from: "Global <mail@snaveware.com>", // sender address
     to: to, // list of receivers
     subject: subject, // Subject line
     text: message, // plain text body
