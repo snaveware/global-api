@@ -9,6 +9,7 @@ const Config = require("../Config");
 const Email = require("../utils/Email");
 const { determineOptions } = require("../utils/query");
 const sgMail = require("@sendgrid/mail");
+const { sendMail } = require("../utils/NodemailerMail");
 
 module.exports = class Manifests {
   static async getManifests(req, res) {
