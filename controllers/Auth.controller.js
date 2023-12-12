@@ -116,12 +116,15 @@ module.exports = class Auth {
       // await sgMail.send(email)
       sendRecoveryEmail(user.email, "Password Recovery", url)
         .then((success) => {
-          return RequestHandler.sendSuccess(res, "Email sent successfully");
+          return RequestHandler.sendSuccess(
+            res,
+            "Recovery Email sent successfully"
+          );
         })
         .catch((error) => {
           return RequestHandler.sendError(
             res,
-            new Error("Failed to send the manifest")
+            new Error("Failed to send Recovery Email")
           );
         });
 

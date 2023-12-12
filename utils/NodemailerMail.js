@@ -1,9 +1,10 @@
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.elasticemail.net",
+  host: "smtp.elasticemail.com",
   port: 2525,
-  secure: true,
+  secure: false,
+
   auth: {
     // TODO: replace `user` and `pass` values from <https://forwardemail.net>
     user: "info@snaveware.com",
@@ -12,7 +13,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // async..await is not allowed in global scope, must use a wrapper
-async function sendMail(to, subject, message, filePath) {
+async function sendMail(to, subject, message, filePath, fileName) {
   // send mail with defined transport object
   const info = await transporter.sendMail({
     from: "info@snaveware.com", // sender address
@@ -22,7 +23,7 @@ async function sendMail(to, subject, message, filePath) {
     html: `<p>${message}</p>`, // html body
     attachments: [
       {
-        filename: "Manifest",
+        filename: fileName,
         path: filePath,
       },
     ],

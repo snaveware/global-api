@@ -196,7 +196,8 @@ module.exports = class Manifests {
       const to = values.email;
       const subject = values.subject;
       const message = values.message;
-      const filePath = `${appRoot}/pdfs/manifest_${req.params.manifestId}.pdf`;
+      const fileName = `manifest_${req.params.manifestId}.pdf`;
+      const filePath = `${appRoot}/pdfs/${fileName}`;
 
       if (!fs.existsSync(filePath)) {
         const manifest = await Model.findOne(req.params.manifestId);
@@ -227,11 +228,12 @@ module.exports = class Manifests {
       // const emailSender = new Email()
       // const email = emailSender.prepareManifestEmail(to,subject,message,filePath)
       // sgMail.send(email)
-      sendMail(to, subject, message, filePath)
+      sendMail(to, subject, message, filePath, fileName)
         .then((success) => {
           return RequestHandler.sendSuccess(res, "Email sent successfully");
         })
         .catch((error) => {
+          console.log("manifest send error: ", error);
           return RequestHandler.sendError(
             res,
             new Error("Failed to send the manifest")
